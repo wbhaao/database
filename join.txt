@@ -1,0 +1,60 @@
+DROP TABLE Patient;
+DROP TABLE Doctor;
+DROP TABLE Examination;
+DROP TABLE Reservation;
+DROP TABLE Sickroom;
+DROP TABLE Hospitalization;
+
+
+CREATE TABLE Patient (
+    p_no number primary key,
+    p_name varchar(10),
+    p_id varchar(15),
+    p_pw varchar(10),
+    p_bd varchar(10)
+);
+CREATE TABLE Doctor (
+    d_no number primary key,
+    d_section varchar(10),
+    d_name varchar(15),
+    d_day varchar(1),
+    d_time varchar(2)
+);
+CREATE TABLE Examination (
+    e_no number primary key,
+    e_name varchar(10)
+);
+CREATE TABLE Reservation (
+    r_no number primary key,
+    p_no number references Patient(p_no),
+    d_no number references Doctor(d_no),
+    r_section varchar(10),
+    r_date varchar(14),
+    r_time varchar(10),
+    e_no number references Examination(e_no)
+);
+CREATE TABLE Sickroom (
+    s_no number primary key,
+    s_people number,
+    s_room number,
+    s_roomno varchar(20)
+);
+CREATE TABLE Hospitalization (
+    h_no number primary key,
+    p_no number references Patient(p_no),
+    s_no number references Sickroom(s_no),
+    h_bedno number,
+    h_sday varchar(14),
+    h_fday varchar(14),
+    h_meal number,
+    h_amount number
+);
+
+INSERT INTO Patient VALUES(1, '김상윤', 'bssm', '1234', '12313123');
+INSERT INTO Patient VALUES(2, '추성우', 'bssm2', '1234', '12313123');
+INSERT INTO Patient VALUES(3, '추성우', 'bssm', '1234', '12313123');
+
+DELETE FROM Patient WHERE p_no=3;
+
+select * from Patient;
+
